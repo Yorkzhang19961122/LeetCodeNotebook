@@ -16,6 +16,7 @@ ex:    1. 2. 3. 4. 5
        1. (1+2). (1+2)+3. (1+2+3)+4. (1+2+3+4)+5   --> nums[4] = nums[4] + nums[3]
                                                    --> nums[i] += nums[i-1]
 */
+/*代码*/
 class Solution {
 public:
     vector<int> runningSum(vector<int>& nums) {
@@ -36,6 +37,7 @@ ex:  1. 2. 3. 4. 5.
                                                  --> res[i] = res[i-1] + nums[i]
 下面的解法不会修改传入的数组：
 */
+/*代码*/
 class Solution {
 public:
     vector<int> runningSum(vector<int>& nums) {
