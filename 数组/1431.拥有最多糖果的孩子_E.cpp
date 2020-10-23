@@ -24,14 +24,14 @@ class Solution {
 public:
     vector<bool> kidsWithCandies(vector<int>& candies, int extraCandies) {
         vector<bool> res(candies.size());
-        for(int i = 0; i < candies.size(); i++){ //遍历所有孩子
+        for(int i = 0; i < candies.size(); i++){  //遍历所有孩子
             int count = 0;  //用于记录某个孩子的糖果多余其他count个孩子
-            for(int j = 0; j <candies.size(); j++){ //将某个孩子加上额外糖果后的数量与原先所有孩子的糖果数分别进行比较
-                if((candies[i] + extraCandies) >= candies[j] ) //这个孩子的糖果数加上额外糖果后大于几个孩子，count就是几
+            for(int j = 0; j <candies.size(); j++){  //将某个孩子加上额外糖果后的数量与原先所有孩子的糖果数分别进行比较
+                if((candies[i] + extraCandies) >= candies[j] )  //这个孩子的糖果数加上额外糖果后大于几个孩子，count就是几
                     count++;          
             }
-            if (count == candies.size()) res[i] = true; //count==candies.size()代表这个孩子的糖果数量大于所有孩子，则该方案成立，对应的res为true
-            else res[i] = false; //若仍然不是最大的，则res为false
+            if (count == candies.size()) res[i] = true;  //count==candies.size()代表这个孩子的糖果数量大于所有孩子，则该方案成立，对应的res为true
+            else res[i] = false;  //若仍然不是最大的，则res为false
         }
         return res;
     } 
@@ -40,9 +40,9 @@ public:
 class Solution {
 public:
     vector<bool> kidsWithCandies(vector<int>& candies, int extraCandies) {
-        vector<bool> res(candies.size(), true); //用true初始化res
+        vector<bool> res(candies.size(), true);  //用true初始化res
         for(int i = 0; i < candies.size(); i++)  //遍历所有孩子
-            for(int j = 0; j < candies.size(); j++) //将每个孩子加上额外的糖果，并和原来每个人的数量比较，若小于任何一个人，则说明他不可能是最多糖果的人
+            for(int j = 0; j < candies.size(); j++)  //将每个孩子加上额外的糖果，并和原来每个人的数量比较，若小于任何一个人，则说明他不可能是最多糖果的人
                 if(candies[i] + extraCandies < candies[j])
                     res[i] = false;
         return res;
@@ -58,10 +58,10 @@ class Solution {
 public:
     vector<bool> kidsWithCandies(vector<int>& candies, int extraCandies) {
         vector<bool> res;
-        auto max_ptr = max_element(candies.begin(), candies.end()); //使用max_element()函数得到candies中最大值的指针
-        int max = *max_ptr; //获得最大值指针存储的最大值
+        auto max_ptr = max_element(candies.begin(), candies.end());  //使用max_element()函数得到candies中最大值的指针
+        int max = *max_ptr;  //获得最大值指针存储的最大值
         for(auto i : candies)  //遍历candies
-            res.push_back(i + extraCandies >= max); //加上额外的糖果后与原来的最大值比较，将结果存入res
+            res.push_back(i + extraCandies >= max);  //加上额外的糖果后与原来的最大值比较，将结果存入res
     return res;
     }
 };
