@@ -1,2 +1,2 @@
-# LeetCodeNotebook
-https://leetcode-cn.com/
+# LeetCodeNotebook([leetcode-cn](https://leetcode-cn.com/))
+
