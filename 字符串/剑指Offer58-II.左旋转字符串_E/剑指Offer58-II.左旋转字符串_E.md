@@ -36,7 +36,7 @@ public:
 
 输入`s = abcdefg`，`n=2`，那么
 
-![左旋字符串](G:\LeetCode\LeetCodeNotebook\字符串\微信截图_20201026103424.png)
+![左旋字符串](https://github.com/Yorkzhang19961122/LeetCodeNotebook/blob/main/%E5%AD%97%E7%AC%A6%E4%B8%B2/%E5%89%91%E6%8C%87Offer58-II.%E5%B7%A6%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2_E/%E5%89%91%E6%8C%87Offer58-II.%E5%B7%A6%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2_E.png)
 
 【题解代码】
 
