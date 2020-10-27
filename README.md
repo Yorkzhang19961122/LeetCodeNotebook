@@ -14,4 +14,5 @@
 |     字符串     |                              -                               |  -   |                              -                               |
 |      1119      | [删去字符串中的元音](https://leetcode-cn.com/problems/remove-vowels-from-a-string/) | Easy | [C++](https://github.com/Yorkzhang19961122/LeetCodeNotebook/blob/main/%E5%AD%97%E7%AC%A6%E4%B8%B2/1119.%E5%88%A0%E5%8E%BB%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%85%83%E9%9F%B3_E.md) |
 | 剑指Offer58-II | [左旋转字符串](https://leetcode-cn.com/problems/zuo-xuan-zhuan-zi-fu-chuan-lcof/) | Easy | [C++](https://github.com/Yorkzhang19961122/LeetCodeNotebook/blob/main/%E5%AD%97%E7%AC%A6%E4%B8%B2/%E5%89%91%E6%8C%87Offer58-II.%E5%B7%A6%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2_E/%E5%89%91%E6%8C%87Offer58-II.%E5%B7%A6%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2_E.md) |
+|      1165      | [单行键盘](https://leetcode-cn.com/problems/single-row-keyboard/) | Easy | [C++](https://github.com/Yorkzhang19961122/LeetCodeNotebook/blob/main/%E5%AD%97%E7%AC%A6%E4%B8%B2/1165.%E5%8D%95%E8%A1%8C%E9%94%AE%E7%9B%98_E/1165.%E5%8D%95%E8%A1%8C%E9%94%AE%E7%9B%98_E.md) |
 
