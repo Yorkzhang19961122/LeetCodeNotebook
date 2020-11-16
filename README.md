@@ -1,6 +1,7 @@
-# LeetCodeNotebook([leetcode-cn](https://leetcode-cn.com/)) 
+# LeetCodeNotebook（自用力扣刷题笔记）
+### 题目来源：[leetcode-cn](https://leetcode-cn.com/)
 
-## Contents
+### Contents
 
 |       #        |                             题目                             | 难度  |                             解答                             |     TODO      |
 | :------------: | :----------------------------------------------------------: | :---: | :----------------------------------------------------------: | :-----------: |
