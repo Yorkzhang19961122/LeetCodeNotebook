@@ -54,3 +54,50 @@ public:
     }
 };
 ```
+
+【题解思路2—暴力】
+
+用两重外循环确定子数组的起始和终止点，再用一重内部的循环来计算这个范围内的元素和，同时更新最大值max，以下两种方法都会超出时间限制，因此只作为练手。
+
+【题解代码3—暴力O(N^3)】
+
+```c++
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        if(nums.size() == 1) return nums[0];
+        int max = INT_MIN;
+        for(int i = 0; i < nums.size(); ++i){  //定前面
+            for(int j = i; j < nums.size(); ++j){  //定后面
+                int sum = 0;
+                for(int p = i; p < j + 1; ++p){  //计算前后间的元素和
+                    sum += nums[p];
+                }
+                if(sum > max) max = sum;    //更新最大值
+            }
+        }
+        return max;
+    }
+};
+```
+
+【题解代码4—暴力O(N^2)】
+
+```c++
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        if(nums.size() == 1) return nums[0];
+        int max = INT_MIN;
+        for(int i = 0; i < nums.size(); ++i){  //定前面
+            int sum = 0;
+            for(int j = i; j < nums.size(); ++j){  //动态相加
+                sum += nums[j];
+                if(sum > max) max = sum;    //更新最大值
+            }
+        }
+        return max;
+    }
+};
+```
+
