@@ -14,11 +14,11 @@
 
 ---
 
-【题解思路—动态规划DP】
+【题解思路1—动态规划DP】
 
 为了使时间复杂度为O(N)，考虑使用动态规划求解，为了降低空间复杂度，直接在nums数组上进行更改，新的nums[i]记录以原nums[i]为结尾的子段和的最大值，nums[i-1]小于0时，nums[i]等于本身（因为加上nums[i-1]只会使得结果更小），当nums[i-1]大于等于0时，nums[i]等于nums[i]+nums[i-1]。
 
-【题解代码1—动态规划DP，新建数组】
+【题解代码1-1—动态规划DP，新建数组】
 
 ```c++
 class Solution {
@@ -37,7 +37,7 @@ public:
 };
 ```
 
-【题解代码2—动态规划DP，原地】
+【题解代码1-2—动态规划DP，原地】
 
 ```c++
 class Solution {
@@ -59,7 +59,7 @@ public:
 
 用两重外循环确定子数组的起始和终止点，再用一重内部的循环来计算这个范围内的元素和，同时更新最大值max，以下两种方法都会超出时间限制，因此只作为练手。
 
-【题解代码3—暴力O(N^3)】
+【题解代码2-1—暴力O(N^3)】
 
 ```c++
 class Solution {
@@ -81,7 +81,7 @@ public:
 };
 ```
 
-【题解代码4—暴力O(N^2)】
+【题解代码2-2—暴力O(N^2)】
 
 ```c++
 class Solution {
@@ -97,6 +97,34 @@ public:
             }
         }
         return max;
+    }
+};
+```
+
+【题解思路3—贪心算法】
+
+> 当叠加的和curSum小于0等于时，就从下一个数重新开始，同时更新最大和的值resSum
+>
+> 当叠加的和curSum大于0时，将下一个数值加入和中，同时更新最大和的值，依此继续
+
+【题解代码3】
+
+```c++
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int resMax = INT_MIN;
+        int curSum = 0;
+        for(int i = 0; i < nums.size(); i++){  //遍历数组
+            if(curSum <= 0){  //如果当前的和小于等于0，那么curSum等于nums[i]，从下一个数重新开始
+                curSum = nums[i];
+            }
+            else {  //如果当前的和大于0，那么将nums[i]加入和中
+                curSum += nums[i];
+            }
+            if(curSum > resMax) resMax = curSum;  //每判断一次都要更新和的最大值
+        }
+        return resMax;
     }
 };
 ```
