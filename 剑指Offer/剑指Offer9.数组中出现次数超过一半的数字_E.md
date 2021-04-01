@@ -89,3 +89,25 @@ public:
 };
 ```
 
+如果题目未告知nums中是否存在众数，则需要在最后添加一个对当前candidate的判断，判断其是否为众数：
+
+```c++
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int vote = 0, candidate = 0;
+        for(int num : nums) {  //遍历nums
+            if(vote == 0) candidate = num;  //如果vote=0，下一个num就成为此时的候选人
+            
+            if(num == candidate) vote++;  //如果num和候选人candidate一致，则票数加1
+            else vote--;  //否则票数抵消
+        }
+        int cnt = 0;
+        for(int num : nums) {
+            if(num == candidate) cnt++;  //统计判断为"众数"数字的数量
+        }
+        return (cnt > nums.size()/2) ? candidate : -1;  //如果确为众数，则返回candidate
+    }
+};
+```
+
