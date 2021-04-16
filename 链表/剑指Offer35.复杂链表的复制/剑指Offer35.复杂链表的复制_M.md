@@ -4,7 +4,7 @@
 
 【示例】
 
-![123](G:\LeetCode\LeetCodeNotebook\链表\剑指Offer35.复杂链表的复制\123.png)
+![123](https://github.com/Yorkzhang19961122/LeetCodeNotebook/blob/main/%E9%93%BE%E8%A1%A8/%E5%89%91%E6%8C%87Offer35.%E5%A4%8D%E6%9D%82%E9%93%BE%E8%A1%A8%E7%9A%84%E5%A4%8D%E5%88%B6/123.png)
 
 ```
 输入：head = [[7,null],[13,0],[11,4],[10,2],[1,0]]
