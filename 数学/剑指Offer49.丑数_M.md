@@ -99,12 +99,13 @@ public:
 class Solution {
 public:
     int nthUglyNumber(int n) {
-        vector<int> dp(n, 0);
-        dp[0] = 1;
-        int p1 = 0, p2 = 0, p3 = 0;
-        for(int i = 1; i < n; i++) {
-            dp[i] = min(min(dp[p1]*2, dp[p2]*3), dp[p3]*5);
-            if(dp[i] == dp[p1]*2) {
+        vector<int> dp(n, 0);  //dp用于存放最后的丑数数组
+        dp[0] = 1;  //将1存入dp
+        int p1 = 0, p2 = 0, p3 = 0;  //初始化三个指针p1,p2,p3
+        for(int i = 1; i < n; i++) {  //循环n-1次
+            dp[i] = min(min(dp[p1]*2, dp[p2]*3), dp[p3]*5);  //取出此时三个数组中的最小值存入dp中
+            //使用三个if是为了防止重复，在出现重复时，对应数组的指针都可以后移
+            if(dp[i] == dp[p1]*2) {  //如果取出的数字dp[i]等于dp[p1]*2(理解为三个子数组中某个数组内对应的值)，则其对应的指针后移
                 p1++;
             }
             if(dp[i] == dp[p2]*3) {
