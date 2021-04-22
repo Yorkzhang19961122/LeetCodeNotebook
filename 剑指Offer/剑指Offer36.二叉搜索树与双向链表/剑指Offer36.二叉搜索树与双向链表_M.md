@@ -20,7 +20,7 @@
 
 下图展示了上面的二叉搜索树转化成的链表。“head” 表示指向链表中有最小元素的节点。
 
-![185943](G:\LeetCode\LeetCodeNotebook\剑指Offer\剑指Offer36.二叉搜索树与双向链表\185943.jpg)
+![](https://github.com/Yorkzhang19961122/LeetCodeNotebook/blob/main/%E5%89%91%E6%8C%87Offer/%E5%89%91%E6%8C%87Offer36.%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%8E%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8/185943.jpg)
 
 【题解思路1—中序遍历+额外存储空间】
 
