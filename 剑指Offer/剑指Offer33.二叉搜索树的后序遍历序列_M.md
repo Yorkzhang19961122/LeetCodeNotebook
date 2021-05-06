@@ -49,15 +49,43 @@
 class Solution {
 public:
     bool recur(vector<int>& postorder, int i, int j) {
-        if(i >= j) return true;
-        int m = i;
-        while(postorder[m] < postorder[j]) m++;
-        int p = m;
-        while(postorder[p] > postorder[j]) p++;
+        if(i >= j) return true;  //递归终止条件
+        int m = i;  //m初始化为i
+        while(postorder[m] < postorder[j]) m++;  //从i开始寻找第一个值大于根节点的索引（左子树）
+        int p = m;  //初始化p为m
+        while(postorder[p] > postorder[j]) p++;  //p从m开始遍历到根节点j，查看是否有值小于根节点（右子树）
         return p == j && recur(postorder, i, m - 1) && recur(postorder, m, j - 1);
     }
 
     bool verifyPostorder(vector<int>& postorder) {
+        return recur(postorder, 0, postorder.size() - 1);
+    }
+};
+```
+
+思路相同，更清晰的题解代码：
+
+```c++
+class Solution {
+public:
+
+    bool recur(vector<int>& postorder, int left, int right) {
+        if(left >= right) return true;  //递归终止条件，叶节点
+        int rootValue = postorder[right];  //当前树的根节点值
+        int m = left;  //借助m对当前的区间[left, right]进行遍历
+        while(postorder[m] < rootValue && m < right) {  //找到第一个大于根节点的索引[left, m)--左子树
+            m++;
+        }
+        for(int i = m; i < right; i++) {  //遍历m索引到当前根节点right[m, right)，判断是否都大于根节点值--右子树
+            if(postorder[i] < rootValue) return false;
+        }
+        //当前树没问题就继续检查其左右子树
+        if(!recur(postorder, left, m - 1)) return false;  //检查左子树
+        if(!recur(postorder, m, right - 1)) return false;  //检查右子树
+        return true;  //最终都没问题就返回true
+    }
+    bool verifyPostorder(vector<int>& postorder) {
+        if(postorder.size() < 2) return true;  //特殊情况排除
         return recur(postorder, 0, postorder.size() - 1);
     }
 };
