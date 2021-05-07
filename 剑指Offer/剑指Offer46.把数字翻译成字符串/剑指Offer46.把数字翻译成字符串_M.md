@@ -21,11 +21,7 @@
 
 此处可以联想到[青蛙跳台阶的问题](https://github.com/Yorkzhang19961122/LeetCodeNotebook/blob/main/%E9%80%92%E5%BD%92/%E5%89%91%E6%8C%87Offer10-II.%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6%E9%97%AE%E9%A2%98_E.md)，只是对于不同的数字组合，转移方程的形式有所不同：
 
-$$ dp(i)=\left\{
-\begin{array}{rcl}
-dp(i-2) + dp(i-1)       &      & {i前面两个数组合后的大小在[10,25]之间，\\说明前两位数字除了各自单独翻译外，还可以组合翻译，\\类似于青蛙跳2级和1级台阶}\\
-dp(i-1)     &      & {否则}\\
-\end{array} \right. $$
+![](https://github.com/Yorkzhang19961122/LeetCodeNotebook/blob/main/%E5%89%91%E6%8C%87Offer/%E5%89%91%E6%8C%87Offer46.%E6%8A%8A%E6%95%B0%E5%AD%97%E7%BF%BB%E8%AF%91%E6%88%90%E5%AD%97%E7%AC%A6%E4%B8%B2/1.jpg)
 
 初始化*无数字*和*1位数字*的翻译方法均为`1`.
 
