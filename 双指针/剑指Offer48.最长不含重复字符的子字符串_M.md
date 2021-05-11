@@ -101,4 +101,49 @@ public:
 };
 ```
 
-以上思路空间复杂度O(1)，时间复杂度O(N^2)，
+[另一种解法](https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/solution/c-san-chong-jie-fa-by-yizhe-shi-2/)：
+
+```c++
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        if(s.size() < 2) return s.size();
+        int left = 0, right = 0, res = 0;
+        unordered_set<char> Set;
+        for(int left = 0; left < s.size(); left++) {  //左指针
+            while(!Set.count(s[right]) && right < s.size()) {  //循环直到right指向的数字在Set中重复或者right越界
+                Set.insert(s[right]);  //将right指向的元素插入Set中
+                right++;  //right右移
+            }
+            res = max(res, right - left);  //更新此时的不重复子串长度
+            Set.erase(s[left]);  //Set中删除left指针指向的元素，再回到外面的for循环，left右移，然后判断right指向的元素是否在新的子串中仍然重复
+            if(right == s.size()) break;
+        }
+        return res;
+    }
+};
+```
+
+我们可以使用哈希表记录每个字符的下一个索引，然后尽量向右移动尾指针来拓展窗口，并更新窗口的最大长度。如果尾指针指向的元素重复，则将头指针直接移动到窗口中重复元素的右侧。
+
+[题解链接](https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/solution/tu-jie-hua-dong-chuang-kou-shuang-zhi-zhen-shi-xia/)
+
+```c++
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        if(s.size() < 2) return s.size();
+        map<char, int> m;  //创建hashmap用来存储字符及其位置
+        int left = 0, res = 0;
+        for(int right = 0; right < s.size(); right++) {  
+            if(m.find(s[right]) != m.end()) {  //如果right指向的元素是重复的
+                left = max(left, m[s[right]] + 1);  //left更新为s[right]在m中对应下标的右边一位；而有些情况下left > m[s[right]] + 1,所以要用max取大值，使得此时的left保持不动，例如'abba'
+            }
+            m[s[right]] = right;  //将right及其下标加入m中
+            res = max(res, right - left + 1);  //更新此时的最大不重复子串长度
+        }
+        return res;
+    }
+};
+```
+
