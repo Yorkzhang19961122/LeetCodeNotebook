@@ -6,7 +6,7 @@
 
 例如，在下面的 3×4 的矩阵中包含单词 "ABCCED"（单词中的字母已标出）。
 
-![](.\DFS\剑指Offer12.矩阵中的路径_M\word2.jpg)
+![](https://github.com/Yorkzhang19961122/LeetCodeNotebook/blob/main/DFS/%E5%89%91%E6%8C%87Offer12.%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%9A%84%E8%B7%AF%E5%BE%84_M/word2.jpg)
 
 【示例】
 
