@@ -40,7 +40,7 @@ public:
 
 【题解思路2—贪心算法（快速幂）】
 
-思路仍然为贪心，但使用快速幂代替循环取余，快速幂是在循环取余的基础上，进一步降低时间复杂度，快速幂的题目见[链接](https://leetcode-cn.com/problems/powx-n/)
+思路仍然为贪心，但使用快速幂（在快速幂的内部进行大数处理）代替循环取余，快速幂是在循环取余的基础上，进一步降低时间复杂度，快速幂的题目见[剑指 Offer 16. 数值的整数次方](https://leetcode-cn.com/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/)和[50. Pow(x, n)](https://leetcode-cn.com/problems/powx-n/)
 
 【题解代码2—贪心算法（快速幂）】
 
@@ -53,11 +53,22 @@ public:
         if(n < 4) return n - 1;  //n等于2、3的情况先处理
         int a = n / 3;  
         int b = n % 3;  //n除以3的余数，只可能有0，1，2三种情况
-        if(b == 0) return pow(3, a);  //余数为0
-        if(b == 1) return pow(3, a - 1) * 4;  //余数为1，最后一个3和余数1不切，直接乘以4
-        return pow(3, a) * 2;  //余数为2
+        if(b == 0) return ((long)pow(3, a)) % 1000000007;  //余数为0
+        if(b == 1) return ((long)pow(3, a - 1)) * 4 % 1000000007;  //余数为1，最后一个3和余数1不切，直接乘以4
+        return ((long)pow(3, a)) * 2 % 1000000007;  //余数为2
     }
 };
 ```
 
-`pow`函数在大数时会越界，因此
+这样直接取模是错误的，因为`pow`函数在大数时会越界，理由如下：
+
+* C++内置的`pow`函数[返回值](http://www.cplusplus.com/reference/cmath/pow/?kw=pow)为`double`类型，而`double`类型无法直接取余`1000000007`，故要将`double`类型转为整形`(int或long)`才能进行取余操作，而在大数情况下，`pow`的计算结果已经超过了整形`(int和long)`的范围，导致转换出错，问题就出在这一步类型转换上，所以不能使用系统内置的`pow`函数进行幂运算，而要自己实现`pow`函数，在实现过程中处理溢出的问题，故使用快速幂实现`pow`函数
+
+再回顾一下常规快速幂的思路：
+
+
+
+```
+
+```
+
