@@ -86,7 +86,7 @@ public:
 
 【[题解思路3—快速幂](https://leetcode-cn.com/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/solution/c-cheng-fa-kuai-su-mi-by-yizhe-shi/)】
 
-`n`的二进制形式一定是由若干0和1构成，例如$x^{9}$，快速幂的思想就是将指数9转换为二进制数：
+`n`的二进制形式一定是由若干0和1构成，例如x^9，快速幂的思想就是将指数9转换为二进制数：
 
 ![](https://github.com/Yorkzhang19961122/LeetCodeNotebook/blob/main/%E9%80%92%E5%BD%92/%E5%89%91%E6%8C%87Offer16.%E6%95%B0%E5%80%BC%E7%9A%84%E6%95%B4%E6%95%B0%E6%AC%A1%E6%96%B9_M/01.png)
 
