@@ -66,7 +66,7 @@ public:
 
 回顾一下常规快速幂的思路：
 
-
+![](https://github.com/Yorkzhang19961122/LeetCodeNotebook/blob/main/%E5%89%91%E6%8C%87Offer/%E5%89%91%E6%8C%87Offer14-II.%E5%89%AA%E7%BB%B3%E5%AD%90II_M/01.png)
 
 ```c++
 class Solution {
