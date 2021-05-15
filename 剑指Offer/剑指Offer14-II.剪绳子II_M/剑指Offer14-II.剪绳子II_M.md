@@ -18,7 +18,7 @@
 
 【题解思路1—贪心算法（循环取余）】
 
-与14-I不同，由于出现了大数取余（导致取余后无法再使用max函数来比大小了，比如取余后 `2000000014`会小于 `1000000020`），所以DP算法在本题中无法使用，故使用贪心，多了一个每步取余的操作
+与剑指Offer14-I不同，由于出现了大数取余（导致取余后无法再使用max函数来比大小了，比如取余后 `2000000014`会小于 `1000000020`），所以DP算法在本题中无法使用，故使用贪心，多了一个每步取余的操作
 
 【题解代码1—贪心算法（循环取余）】
 
@@ -27,13 +27,13 @@ class Solution {
 public:
     int cuttingRope(int n) {
         long res = 1;
-        if(n < 4) return n - 1;
+        if(n < 4) return n - 1;  //特殊情况
         if(n == 4) return 4;
         while(n > 4) {
-            n -= 3;
-            res = res * 3 % 1000000007;  //每步取余
+            n -= 3;  //循环减3
+            res = res * 3 % 1000000007;  //res循环乘3，每步取余
         }
-        return (int)res * n % 1000000007;
+        return (int)res * n % 1000000007;  //最后返回时乘以小于等于4的最后一小段
     }
 };
 ```
@@ -54,21 +54,64 @@ public:
         int a = n / 3;  
         int b = n % 3;  //n除以3的余数，只可能有0，1，2三种情况
         if(b == 0) return ((long)pow(3, a)) % 1000000007;  //余数为0
-        if(b == 1) return ((long)pow(3, a - 1)) * 4 % 1000000007;  //余数为1，最后一个3和余数1不切，直接乘以4
+        if(b == 1) return ((long)pow(3, a - 1)) * 4 % 1000000007;  //余数为1，最后一个3和余数1之间不切，直接乘以4
         return ((long)pow(3, a)) * 2 % 1000000007;  //余数为2
     }
 };
 ```
 
-这样直接取模是错误的，因为`pow`函数在大数时会越界，理由如下：
+这样直接`pow`后取模是错误的，因为`pow`函数在大数时会越界，理由如下：
 
 * C++内置的`pow`函数[返回值](http://www.cplusplus.com/reference/cmath/pow/?kw=pow)为`double`类型，而`double`类型无法直接取余`1000000007`，故要将`double`类型转为整形`(int或long)`才能进行取余操作，而在大数情况下，`pow`的计算结果已经超过了整形`(int和long)`的范围，导致转换出错，问题就出在这一步类型转换上，所以不能使用系统内置的`pow`函数进行幂运算，而要自己实现`pow`函数，在实现过程中处理溢出的问题，故使用快速幂实现`pow`函数
 
-再回顾一下常规快速幂的思路：
+回顾一下常规快速幂的思路：
 
 
 
+```c++
+class Solution {
+public:
+    double myPow(double x, int n) {
+        if(x == 0) return x;  //0的n次方等于0(n > 0)
+        long exp = n;  //防止n小于零且等于-2^31时，取相反数会超出int的范围(-2^31, 2^31 - 1)，因此将n事先存到long类型的exp中
+        if(n < 0) {
+            exp = -exp;
+            x = 1 / x;  //当指数小于零时，实际上是对倒数求幂运算: x^-n = (1/x)^n
+        }
+        double res = 1.0;
+        while(exp) {
+            if((exp & 1) == 1) res *= x;  //当前位为0时跳过
+            x *= x;  
+            exp >>= 1;   //右移判断下一位
+        }
+        return res;
+    }
+};
 ```
 
+再回到本题，首先不需要考虑指数小于零的情况，且在进行计算时，要处理大数的问题（即取模1e9+7），代码如下：
+
+```c++
+class Solution {
+public:
+    int cuttingRope(int n) {
+        if(n < 4) return n - 1;  //n等于2、3的情况先处理
+        int a = n / 3;
+        int b = n % 3;  //n除以3的余数，只可能有0，1，2三种情况
+        if(b == 0) return (int)(myPow(3, a) % 1000000007);  //余数为0
+        if(b == 1) return (int)(myPow(3, a - 1) * 4 % 1000000007);  //余数为1，最后一个3和余数1之间不切，直接乘以4
+        return (int)(myPow(3, a) * 2 % 1000000007);  //余数为2
+    }
+    //快速幂
+    long myPow(long base, int exp) {
+        long res = 1;
+        while(exp > 0) {
+            if((exp & 1) == 1) res = res * base % 1000000007;
+            base = base * base % 1000000007;
+            exp >>= 1;
+        }
+        return res;
+    }
+};
 ```
 
