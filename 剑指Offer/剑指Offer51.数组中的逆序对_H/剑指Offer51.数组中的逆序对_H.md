@@ -43,7 +43,7 @@ public:
 
 总体思路见下图：
 
-
+![](https://github.com/Yorkzhang19961122/LeetCodeNotebook/blob/main/%E5%89%91%E6%8C%87Offer/%E5%89%91%E6%8C%87Offer51.%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%80%86%E5%BA%8F%E5%AF%B9_H/02.png)
 
 归并排序的代码如下（升序排列一个数组）：
 
@@ -107,7 +107,7 @@ i         j
 
 当`i`指向2，`j`指向0时，说明左子数组所有的元素都与`j`指向的元素构成了逆序对，而这种关系在归并排序中很容易计算得到，如下图：
 
-
+![](https://github.com/Yorkzhang19961122/LeetCodeNotebook/blob/main/%E5%89%91%E6%8C%87Offer/%E5%89%91%E6%8C%87Offer51.%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%80%86%E5%BA%8F%E5%AF%B9_H/01.png)
 
 【题解代码—归并排序】
 
