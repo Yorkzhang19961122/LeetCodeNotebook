@@ -111,7 +111,52 @@ i         j
 
 【题解代码—归并排序】
 
-```
-
+```C++
+class Solution {
+public:
+    int count = 0;
+    int reversePairs(vector<int>& nums) {
+        vector<int> copy(nums);  //不修改原数组，拷贝构造nums
+        int len = copy.size();
+        if(len < 2) return 0;  //长度为2不构成逆序对
+        mergeSort(copy, 0, len - 1);
+        return count;
+    }
+    void mergeSort(vector<int>& copy, int left, int right) {
+        int mid = left + (right - left) / 2;
+        if(left < right) {
+            mergeSort(copy, left, mid);  //递归划分左半区
+            mergeSort(copy, mid + 1, right);  //递归划分右半区
+            mergeTwoArray(copy, left, mid, right);  //合并两个有序数组
+        }
+    }
+    //合并两个有序数组到
+    void mergeTwoArray(vector<int>& copy, int left, int mid, int right) {
+        vector<int> temp(right - left + 1, 0);  //temp存储排序后的结果
+        int l_pos = left, r_pos = mid + 1;  //l_pos指向左有序数组的首部，r_pos指向右有序数组的首部
+        int index = 0;
+        while(l_pos <= mid && r_pos <= right) {  //比较l_pos和r_pos指向的元素值大小
+            if(copy[l_pos] <= copy[r_pos]) {
+                temp[index++] = copy[l_pos++];  
+            }
+            else {  
+                temp[index++] = copy[r_pos++];
+                count += (mid - l_pos + 1);  //若copy[l_pos]>copy[r_pos]，则l_pos到mid之间的元素都和r_pos位置的元素形成逆序对，统计逆序对数量count
+            }
+        }
+        //把左子数组剩余的元素添加到temp中
+        while(l_pos <= mid) {
+            temp[index++] = copy[l_pos++];
+        }
+        //把右子数组剩余的元素添加到temp中
+        while(r_pos <= right) {
+            temp[index++] = copy[r_pos++];
+        }
+        //辅助数组temp中的元素覆盖原copy数组对应的位置
+        for(int i = 0; i < temp.size(); i++) {
+            copy[i + left] = temp[i];
+        }
+    }
+};
 ```
 
