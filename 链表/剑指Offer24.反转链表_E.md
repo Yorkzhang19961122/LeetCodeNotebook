@@ -80,7 +80,7 @@ public:
 private:
     ListNode* recur(ListNode* cur, ListNode* pre){
         if(cur == nullptr) return pre;  //终止条件
-        ListNode* res = recur(cur->next, cur);  //递归后继节点
+        ListNode* res = recur(cur->next, cur);  //递归后继节点，res在回溯过程中一直是反转链表的头节点
         cur->next = pre;  //修改节点引用指向
         return res;  //返回反转链表的头节点
     }
@@ -88,3 +88,35 @@ private:
 ```
 
 图解链接：https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/solution/jian-zhi-offer-24-fan-zhuan-lian-biao-die-dai-di-2/
+
+---
+
+【2刷】
+
+题解1原地双指针反转的方法没写出来Orz，自己new了一个反转的链表：
+
+```c++
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        if(head == NULL) return NULL;
+        if(head -> next == NULL) return head;
+        ListNode* pre = new ListNode(head -> val);
+        while(head -> next != NULL) {
+            head = head -> next;
+            ListNode* node = new ListNode(head -> val);  //每个节点都要new出来，并且指向之前已经反转后的最后一个新节点
+            node -> next = pre;
+            pre = node;
+        }
+        return pre;
+    }
+};
+```
