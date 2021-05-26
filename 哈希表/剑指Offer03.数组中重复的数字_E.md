@@ -71,22 +71,22 @@ public:
 
 【题解思路—原地交换】
 
-题目说明尚未被充分使用，即 在一个长度为 n 的数组 nums 里的所有数字都在 0 ~ n-1 的范围内 。 此说明含义：数组元素的 索引 和 值 是 一对多 的关系。
-因此，可遍历数组并通过交换操作，使元素的 索引 与 值 一一对应（即 nums[i] = i ）。因而，就能通过索引映射对应的值，起到与字典等价的作用。
+题目说明尚未被充分使用，即 在一个长度为 `n` 的数组 `nums` 里的所有数字都在 `0 ~ n-1` 的范围内 。 此说明含义：数组元素的 索引 和 值 是 一对多 的关系。
+因此，可遍历数组并通过交换操作，使元素的 索引 与 值 一一对应（即 `nums[i] = i` ）。因而，就能通过索引映射对应的值，起到与字典等价的作用。
 
-遍历中，第一次遇到数字 x 时，将其交换至索引 x 处；而当第二次遇到数字 x 时，一定有 nums[x] = x，此时即可得到一组重复数字。
+遍历中，第一次遇到数字 `x` 时，将其交换至索引 `x` 处；而当第二次遇到数字 `x` 时，一定有 `nums[x] = x`，此时即可得到一组重复数字。
 
 算法流程：
 
-1. 遍历数组 nums ，设索引初始值为 i = 0:
+1. 遍历数组 `nums` ，设索引初始值为 `i = 0`:
 
-   >若 nums[i] = inums[i]=i ： 说明此数字已在对应索引位置，无需交换，因此跳过
+   >若 `nums[i] = i` ： 说明此数字已在对应索引位置，无需交换，因此跳过
    >
-   >若 nums[nums[i]] = nums[i]： 代表索引 nums[i]处和索引 i 处的元素值都为 nums[i]，即找到一组重复值，返回此值 nums[i]
+   >若 `nums[nums[i]] = nums[i]`： 代表索引 `nums[i]`处和索引 `i` 处的元素值都为 `nums[i]`，即找到一组重复值，返回此值 `nums[i]`
    >
-   >否则：交换索引为 i 和 nums[i] 的元素值，将此数字交换至对应索引位置
+   >否则：交换索引为 `i` 和 `nums[i]` 的元素值，将此数字交换至对应索引位置
 
-2. 若遍历完毕尚未返回，则返回 -1 
+2. 若遍历完毕尚未返回，则返回 `-1` 
 
 【题解代码—原地交换】
 
@@ -96,12 +96,33 @@ public:
     int findRepeatNumber(vector<int>& nums) {
         int i = 0;
         while(i < nums.size()){
-            if(nums[i] == i){
+            if(nums[i] == i){  //说明此数字已在对应索引位置，无需交换，跳过
                 ++i;
                 continue;
             }
-            else if(nums[i] == nums[nums[i]]) return nums[i];
-            else swap(nums[i], nums[nums[i]]);
+            else if(nums[i] == nums[nums[i]]) return nums[i];  //下标i和下标nums[i]处的值相同，则返回此值
+            else swap(nums[i], nums[nums[i]]);  //交换下标i和下标nums[i]的值
+        }
+        return -1;
+    }
+};
+```
+
+如果没有重复数字，那么正常排序后，数字`i`应该在下标为`i`的位置，所以思路是重头扫描数组，遇到下标为`i`的数字如果不是`i`的话，（假设为`m`),那么我们就拿下标`m`的数字交换。在交换过程中，如果有重复的数字发生，那么终止返回`ture`
+
+可以写作：
+
+```c++
+class Solution {
+public:
+    int findRepeatNumber(vector<int>& nums) {
+        for(int i = 0; i < nums.size(); i++) {
+            while(nums[i] != i) {  //如果nums[i] != i，那么下标i的元素就应该到它该在的位置，那么就要交换下标i和下标nums[i]的元素
+                if(nums[i] == nums[nums[i]]) {  //如果要交换的元素已经相同了，则返回
+                    return nums[i];
+                }
+                swap(nums[i], nums[nums[i]]);  //否则交换
+            }
         }
         return -1;
     }
