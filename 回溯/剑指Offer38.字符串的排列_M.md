@@ -13,7 +13,7 @@
 
 ---
 
-【题解思路—回溯法[题解1](https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/solution/shu-ju-jie-gou-he-suan-fa-hui-su-suan-fa-11gk/)[题解2](https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/solution/c-zong-jie-liao-hui-su-wen-ti-lei-xing-dai-ni-ga-4/)】
+【题解思路—回溯法[题解1](https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/solution/shu-ju-jie-gou-he-suan-fa-hui-su-suan-fa-11gk/) [题解2](https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/solution/c-zong-jie-liao-hui-su-wen-ti-lei-xing-dai-ni-ga-4/) [题解3](https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/solution/c-zong-jie-liao-hui-su-wen-ti-lei-xing-dai-ni-ga-4/)】
 
 【题解代码—回溯法】
 
@@ -75,6 +75,8 @@ public:
 | ※搜索      | [解数独](https://leetcode-cn.com/problems/sudoku-solver/)、[单词搜索](https://leetcode-cn.com/problems/word-search/)、[N皇后](https://leetcode-cn.com/problems/eight-queens-lcci/)、[分割回文串](https://leetcode-cn.com/problems/palindrome-partitioning/)、[二进制手表](https://leetcode-cn.com/problems/binary-watch/) |
 
 **注意**：子集、组合与排列是不同性质的概念。子集、组合是无关顺序的，而排列是和元素顺序有关的，如 [1，2] 和 [2，1] 是同一个组合(子集)，但 [1,2] 和 [2,1] 是两种不一样的排列！因此被分为两类问题
+
+**“排列”类型问题和“子集、组合”问题不同在于**：“排列”问题使用**used数组**来标识选择列表，而“子集、组合”问题则使用**start参数**。另外还需注意两种问题的判重剪枝！
 
 如何写回溯算法：
 
