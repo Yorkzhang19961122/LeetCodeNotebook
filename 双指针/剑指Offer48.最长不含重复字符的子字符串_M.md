@@ -86,6 +86,7 @@ public:
         int res = 1;
         while(tail < s.size()) {  //循环处理字串s
             //s.substr(head, tail - head) 代表当前滑动窗口[head, tail - 1]中的字符串
+            //string的find函数如果查找不到返回s.npos，也等于-1
             if(s.substr(head, tail - head).find(s[tail]) == s.substr(head, tail - head).npos) {  //如果tail指向的字符在此时的滑动窗口[head, tail - 1]中不存在
                 res = max(res, tail - head + 1);  //此时的滑动窗口[head, tail]长度就是目前的不重复子串，同时更新res
                 tail++;  //当前窗口处理完后tail右移
