@@ -77,6 +77,8 @@ public:
 
 【题解代码—滑动窗口（双指针）】
 
+以下是不借助其他数据结构的写法，直接在字符串上进行处理：
+
 ```c++
 class Solution {
 public:
@@ -102,30 +104,38 @@ public:
 };
 ```
 
-[另一种解法](https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/solution/c-san-chong-jie-fa-by-yizhe-shi-2/)：
+还可以借助hash表存放当前窗口中的字符（思路与上面的代码相同）：
 
 ```c++
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        if(s.size() < 2) return s.size();
-        int left = 0, right = 0, res = 0;
-        unordered_set<char> Set;
-        for(int left = 0; left < s.size(); left++) {  //左指针
-            while(!Set.count(s[right]) && right < s.size()) {  //循环直到right指向的数字在Set中重复或者right越界
-                Set.insert(s[right]);  //将right指向的元素插入Set中
-                right++;  //right右移
-            }
-            res = max(res, right - left);  //更新此时的不重复子串长度
-            Set.erase(s[left]);  //Set中删除left指针指向的元素，再回到外面的for循环，left右移，然后判断right指向的元素是否在新的子串中仍然重复
-            if(right == s.size()) break;
+    if(s.size() < 2) return s.size();
+    int left = 0, right = 1, res = 1;
+    unordered_set<char> Set;
+    Set.insert(s[left]);
+    while(right < s.size()) {
+        if(Set.find(s[right]) == Set.end()) {  //right指针指向的元素在当前set中不存在
+            Set.insert(s[right]);
+            right++;
+            res = max(res, right - left);
         }
-        return res;
+        else {  //right指针指向的元素在当前set中存在
+            while(Set.find(s[right]) != Set.end()) {  //循环在set中找到s[right]，如果能找到，说明重复元素仍在当前窗口中
+                //移除left指向的元素，并减小窗口，直到窗口中不含有重复的元素(即s[right])
+                Set.erase(s[left]);  
+                left++;
+            }
+        }
+    }
+    return res;
     }
 };
 ```
 
-我们可以使用哈希表记录每个字符的下一个索引，然后尽量向右移动尾指针来拓展窗口，并更新窗口的最大长度。如果尾指针指向的元素重复，则将头指针直接移动到窗口中重复元素的右侧。
+
+
+除此之外，我们还可以使用哈希map记录每个字符的下一个索引，然后尽量向右移动尾指针来拓展窗口，并更新窗口的最大长度。如果尾指针指向的元素重复，则将头指针直接移动到窗口中重复元素的右侧。
 
 [题解链接](https://leetcode-cn.com/problems/zui-chang-bu-han-zhong-fu-zi-fu-de-zi-zi-fu-chuan-lcof/solution/tu-jie-hua-dong-chuang-kou-shuang-zhi-zhen-shi-xia/)
 
@@ -138,10 +148,36 @@ public:
         int left = 0, res = 0;
         for(int right = 0; right < s.size(); right++) {  
             if(m.find(s[right]) != m.end()) {  //如果right指向的元素是重复的
-                left = max(left, m[s[right]] + 1);  //left更新为s[right]在m中对应下标的右边一位；而有些情况下left > m[s[right]] + 1,所以要用max取大值，使得此时的left保持不动，例如'abba'
+                left = max(left, m[s[right]] + 1);  //left更新为s[right]在m中对应下标的右边一位；而有些情况下left > m[s[right]] + 1,所以要用max取大值，使得此时的left保持不动（只关注当前窗口left,right之间的元素），例如'abba'
             }
             m[s[right]] = right;  //将right及其下标加入m中
             res = max(res, right - left + 1);  //更新此时的最大不重复子串长度
+        }
+        return res;
+    }
+};
+```
+
+按照上面的代码风格，这种思路可以写作：
+
+```c++
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        if(s.size() < 2) return s.size();
+        int left = 0, right = 1, res = 1;
+        unordered_map<char, int> Map;
+        Map[s[left]] = left;
+        while(right < s.size()) {
+            if(Map.find(s[right]) == Map.end()) {
+                Map[s[right]] = right;
+                right++;
+                res = max(res, right - left);
+            }
+            else {
+                left = max(left, Map[s[right]] + 1);  //注意这个max，使我们只关注当前窗口[left,right]中的元素
+                Map.erase(s[right]);
+            }
         }
         return res;
     }
