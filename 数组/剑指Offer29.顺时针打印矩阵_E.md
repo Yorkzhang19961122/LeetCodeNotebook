@@ -21,7 +21,7 @@
 
 > 1.根据边界打印，即将元素按顺序添加至列表 res 尾部；
 >
-> 2.边界向内收缩 11 （代表已被打印）；
+> 2.边界向内收缩 1 （代表已被打印）；
 >
 > 3.判断是否打印完毕（边界是否相遇），若打印完毕则跳出。
 
@@ -40,16 +40,20 @@ public:
         while(true) {
             //left->right
             for(int i = l; i <= r; i++) res.push_back(matrix[t][i]);
-            if(++t > b) break;
+            ++t;  //向下收缩
+            if(t > b) break;
             //top->bottom
             for(int i = t; i <= b; i++) res.push_back(matrix[i][r]);
-            if(--r < l) break;
+            --r;  //向左收缩
+            if(r < l) break;
             //right->left
             for(int i = r; i >= l; i--) res.push_back(matrix[b][i]);
-            if(--b < t) break;
+            --b;  //向上收缩
+            if(b < t) break;
             //bottom->top
             for(int i = b; i >=t; i--) res.push_back(matrix[i][l]);
-            if(++l > r) break;
+            ++l;  //向右收缩
+            if(l > r) break;
         }
         return res;
     }
