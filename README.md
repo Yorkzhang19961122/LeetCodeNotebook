@@ -5,11 +5,7 @@
 
 ### 总结归纳：
 
-| [排序算法](https://github.com/Yorkzhang19961122/LeetCodeNotebook/blob/main/%E6%80%BB%E7%BB%93%E5%BD%92%E7%BA%B3/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95.md) |      |      |      |
-| :----------------------------------------------------------: | ---- | ---- | ---- |
-|                                                              |      |      |      |
-|                                                              |      |      |      |
-|                                                              |      |      |      |
+[排序算法](https://github.com/Yorkzhang19961122/LeetCodeNotebook/blob/main/%E6%80%BB%E7%BB%93%E5%BD%92%E7%BA%B3/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95.md)、
 
 ### Contents：
 
