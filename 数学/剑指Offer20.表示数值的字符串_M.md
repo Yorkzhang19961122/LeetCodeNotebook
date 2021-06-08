@@ -74,12 +74,14 @@ public:
             //2.小数点后可以没有数字，233.等于233.0
             //3.小数点前和后都有数字，1.234
             //4.所以此处用||
-            numeric = isUnsignedInteger(s, index) || numeric; //小数点前的字符是否合规||小数点后的数字是否为无符号整数（注意此处的顺序，要先让index到小数点后面判断，参考用例"0.8"）
+            //注意此处的顺序，要先让index到小数点后面去进行判断
+            //否则小数点前面的numeric==true就已经让整体为true了，而index还没有动，导致最后indx不等于s.size()，参考用例"0.8"
+            numeric = isUnsignedInteger(s, index) || numeric; //小数点后的数字是否为无符号整数||小数点前的字符是否合规
         }
         if(s[index] == 'e' || s[index] == 'E') {  //如果出现'e'或'E'，接下来的数字是指数部分
             index++;
             //1.若e或E前没有数字则不合规，例如.e1，e2
-            //2.若e或E后没有数字则不合规，例如12e，12e+5.4
+            //2.若e或E后没有数字或不为整数则不合规，例如12e，12e+5.4
             //3.所以此处用&&
             numeric = numeric && isInteger(s, index); //e或E前的字符是否合规&&e或E后是否为整数
         }
