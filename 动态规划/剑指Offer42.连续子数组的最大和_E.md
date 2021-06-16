@@ -16,7 +16,11 @@
 
 【题解思路1—动态规划DP】
 
-为了使时间复杂度为`O(N)`，考虑使用动态规划求解，为了降低空间复杂度，直接在`nums`数组上进行更改，新的`nums[i]`记录以原`nums[i]`为结尾的子段和的最大值，`nums[i-1]`小于`0`时，`nums[i]`等于本身（因为加上`nums[i-1]`只会使得结果更小），当`nums[i-1]`大于等于`0`时，`nums[i]`等于`nums[i]+nums[i-1]`。
+为了使时间复杂度为`O(N)`，考虑使用动态规划求解：
+
+* 创建`dp`数组，`dp[i]`表示`nums`中以`nums[i]`结尾的最大子序和，而`dp[i] = max(dp[i - 1] + nums[i], nums[i])`
+
+* 为了降低空间复杂度，直接在`nums`数组上进行更改，新的`nums[i]`记录以原`nums[i]`为结尾的子段和的最大值，`nums[i-1]`小于`0`时，`nums[i]`等于本身（因为加上`nums[i-1]`只会使得结果更小），当`nums[i-1]`大于等于`0`时，`nums[i]`等于`nums[i]+nums[i-1]`
 
 【题解代码1-1—动态规划DP，新建数组】
 
@@ -28,7 +32,7 @@ public:
         dp[0] = nums[0];  //dp[0]用nums[0]初始化
         for(int i = 1; i < nums.size(); ++i){  //遍历nums
             if(dp[i-1] >= 0){  //如果dp[i-1]大于等于0
-                dp[i] = nums[i] + dp[i-1];  //dp[i]等于nums[i]加dp[i-1]，使得dp[i]更大
+                dp[i] = nums[i] + dp[i-1];  //dp[i]等于nums[i]加上大于0的dp[i-1]，使dp[i]得以变大
             }
             else dp[i] = nums[i];  //而dp[i-1]小于0，则dp[i]直接等于nums[i]
         }
@@ -37,7 +41,30 @@ public:
 };
 ```
 
+上述代码可以进一步优化空间复杂度为：
+
+```c++
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        vector<int> dp(nums.size());
+        dp[0] = nums[0];
+        
+        for(int i = 1; i < nums.size(); i++) {
+            dp[i] = max(dp[i - 1] + nums[i], nums[i]);
+        }
+        return *max_element(dp.begin(), dp.end());
+    }
+};
+```
+
+> 时间复杂度O(N)
+>
+> 空间复杂度O(N)
+
 【题解代码1-2—动态规划DP，原地】
+
+动态规划可以进一步优化空间复杂度：
 
 ```c++
 class Solution {
@@ -55,7 +82,11 @@ public:
 };
 ```
 
-二刷时写此时路的代码：
+> 时间复杂度O(N)
+>
+> 空间复杂度O(1)
+
+二刷时写此思路的代码：
 
 ```c++
 class Solution {
