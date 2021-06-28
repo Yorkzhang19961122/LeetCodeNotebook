@@ -92,6 +92,40 @@ public:
 };
 ```
 
+【二刷】：
+
+DFS中的代码可以写成更加直观的方式（原代码中直接`return 1+... ...`也可以写作如下：）
+
+```c++
+class Solution {
+public:
+    int res = 0;  //使用一个全局变量res，来获得结果
+    int movingCount(int m, int n, int k) {
+        vector<vector<bool>> visited(m, vector<bool>(n, false));
+        dfs(m, n, k, visited, 0, 0); 
+        return res;
+    }
+
+    int get(int n) {
+        int sum = 0;
+        while(n > 0) {
+            sum += n % 10;
+            n /= 10;
+        }
+        return sum;
+    }
+
+    void dfs(int m, int n, int k, vector<vector<bool>>& visited, int row, int col) {
+        if(row < 0 || row > m - 1 || col < 0 || col > n - 1 
+           || get(row) + get(col) > k || visited[row][col]) return;
+        res++;  //res加一
+        visited[row][col] = true;
+        dfs(m, n, k, visited, row + 1, col);
+        dfs(m, n, k, visited, row, col + 1);
+    }
+};
+```
+
 【[题解思路2—BFS](https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/solution/jian-zhi-offerer-shua-javadfs-bfs-tu-jie-py05/)】
 
 对于DFS和BFS，我们可以做如下分析：
