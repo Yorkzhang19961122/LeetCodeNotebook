@@ -32,7 +32,7 @@ public:
         dp[0] = nums[0];  //dp[0]用nums[0]初始化
         for(int i = 1; i < nums.size(); ++i){  //遍历nums
             if(dp[i-1] >= 0){  //如果dp[i-1]大于等于0
-                dp[i] = nums[i] + dp[i-1];  //dp[i]等于nums[i]加上大于0的dp[i-1]，使dp[i]得以变大
+                dp[i] = nums[i] + dp[i-1];  //dp[i]等于nums[i]加上大于0的dp[i-1]，使结果得以变大
             }
             else dp[i] = nums[i];  //而dp[i-1]小于0，则dp[i]直接等于nums[i]
         }
