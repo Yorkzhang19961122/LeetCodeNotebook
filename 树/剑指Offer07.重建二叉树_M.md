@@ -58,20 +58,20 @@ public:
         return recur(0, 0, in.size() - 1);
     }
 
-    TreeNode* recur(int root, int left, int right) {  //（根，树的左边界，树的右边界）其中root一直考虑在先序遍历数组，而left和right则考虑在中序遍历中数组
+    TreeNode* recur(int pre_root, int left, int right) {  //（根，树的左边界，树的右边界）其中pre_root一直考虑在先序遍历数组，而left和right则考虑在中序遍历中数组
         if(left > right) return NULL;  //递归终止条件
-        TreeNode* node = new TreeNode(pre[root]);  //确定重建树的节点node
-        int index = map[pre[root]];  //index为中序遍历中根节点的索引，方便进行左右子树的划分（关键点之一：前序遍历的列表用来知道根节点的值，从而定位根节点在中序遍历中的位置index）
+        TreeNode* node = new TreeNode(pre[pre_root]);  //确定重建树的节点node
+        int in_root = map[pre[pre_root]];  //in_root为中序遍历中根节点的索引，方便进行左右子树的划分（关键点之一：前序遍历的列表用来知道根节点的值，从而定位根节点在中序遍历中的位置in_root）
         //递归左子树的划分
-        //左子树的根的索引为先序数组中的root+1  【根|左|右】（结合上面一行code，形参root是用来找根索引的）
+        //左子树的根的索引为先序数组中的pre_root+1  【根|左|右】（结合上面一行code，形参pre_root是用来找根索引的）
         //左子树的左边界为中序数组的left  【左|根|右】（关键点之二：通过中序遍历的列表划分左右子树）
         //左子树的右边界为中序的根节点索引-1  【左|根|右】
-        node->left = recur(root + 1, left, index - 1);  
+        node->left = recur(pre_root + 1, left, in_root - 1);  
         //递归右子树的划分=>右子树的根/左边界/右边界
-        //右子树的根的索引为先序数组中 root+左子树的数量 + 1  【根|左|右】
-        //右子树的左边界为中序数组的root+1 【左|根|右】
+        //右子树的根的索引为先序数组中 pre_root + 左子树的数量 + 1  【根|左|右】
+        //右子树的左边界为中序数组的in_root+1 【左|根|右】
         //右子树的右边界为中序数组的right  【左|根|右】
-        node->right = recur(root + (index - left) + 1, index + 1, right);  
+        node->right = recur(pre_root + (in_root - left) + 1, in_root + 1, right);  
         return node;
     }
 };
