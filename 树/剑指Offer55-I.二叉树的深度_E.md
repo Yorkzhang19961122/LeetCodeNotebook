@@ -18,7 +18,7 @@
 
 ---
 
-【题解思路1—DFS递归】
+【[题解思路1—DFS递归](https://leetcode-cn.com/problems/er-cha-shu-de-shen-du-lcof/solution/mian-shi-ti-55-i-er-cha-shu-de-shen-du-xian-xu-bia/)】
 
 本题其实也要后序遍历（左右中），依然是因为要通过递归函数的返回值做计算树的高度。
 
