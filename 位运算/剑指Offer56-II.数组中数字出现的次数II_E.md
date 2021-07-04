@@ -46,18 +46,19 @@ class Solution {
 public:
     int singleNumber(vector<int>& nums) {
         int binsum[32] = {0};  //因为int最大到2^31，所以二进制形式最大为32位
-        for(int num : nums)
-            for(int i = 31; i >=0; --i){
+        for(int num : nums) {
+            for(int i = 31; i >=0; i--){
                 binsum[i] += num & 1;  //将nums的所有num转为二进制并相加
                 num >>= 1;
+            }  
+        }
+        int res = 0;
+        for(int i = 31; i >= 0; i--){
+            if(binsum[i] % 3 != 0){  //哪一位不能被3整除，就说明目标数字的二进制在该位为1
+                res += pow(2, (31 - i));  //将二进制转为十进制
             }
-            int res = 0;
-            for(int i = 0; i < 32; ++i){
-                if(binsum[i] % 3 != 0){  //哪一位不能被3整除，就说明目标数字的二进制在该位为1
-                    res += pow(2, (31 - i));  //将二进制转为十进制
-                }
-            }
-            return res;
+        }
+        return res;
     }
 };
 ```
