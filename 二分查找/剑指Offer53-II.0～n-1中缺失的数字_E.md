@@ -41,6 +41,23 @@ public:
 };
 ```
 
+参考y总的二分模板：
+
+```c++
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int l = 0, r = nums.size(); //r = nums.size()
+        while(l < r) {
+            int m = (l + r) >> 1;
+            if(nums[m] == m) l = m + 1;
+            else r = m; 
+        }
+        return l;
+    }
+};
+```
+
 【题解思路2—遍历】
 
 直接遍历整个数组，缺哪个数就返回哪个，注意如果缺的是最后一个数，那么直接在最后返回原数组的长度即可。
