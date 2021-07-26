@@ -51,7 +51,7 @@ public:
         if(a.size() == 0) return a;
         int size = a.size();
         vector<int> B(size, 1);  //初始化数组B用于中途计算与结果存储
-        B[0] = 1;  
+        B[0] = 1;  //B先用来存储当前位置左边元素的乘积
         for(int i = 1; i < size; i++) {  //遍历a，计算a中第i个位置（从下标1开始）左边的元素之积，其中显然B[0]为1
             B[i] = B[i - 1] * a[i - 1];
         }
